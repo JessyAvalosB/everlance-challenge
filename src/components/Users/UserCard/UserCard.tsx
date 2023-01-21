@@ -1,8 +1,8 @@
 import React from "react";
-import Icon from "../Icon/Icon";
+import Icon from "../../Icon/Icon";
 import UserName from "../UserName/UserName";
 import UserAvatar from "../UserAvatar/UserAvatar";
-import { IconsNames } from "../Icon/Types";
+import { IconsNames } from "../../Icon/Types";
 
 const UserCard = () => {
   return (

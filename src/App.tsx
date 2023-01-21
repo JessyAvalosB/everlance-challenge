@@ -1,13 +1,9 @@
 import React from "react";
 import "./App.css";
-import UserCard from "./components/UserCard/UserCard";
+import Users from "./components/Users/Users";
 
 function App() {
-  return (
-    <div className="">
-      <UserCard />
-    </div>
-  );
+  return <Users />;
 }
 
 export default App;

@@ -12,8 +12,8 @@ const UserCard = () => {
         <UserName userName="gabriel" />
       </div>
       <div className="flex justify-between items-end mt-3">
-        <Icon icon={IconsNames.github} />
-        <span className="text-pale-robin-egg-blue">View Profile</span>
+        <Icon classname="w-6" icon={IconsNames.github} />
+        <span className="text-pale-robin-egg-blue cursor-pointer">View Profile</span>
       </div>
     </div>
   );

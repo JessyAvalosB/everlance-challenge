@@ -1,11 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import UserCard from "./components/UserCard/UserCard";
 
 function App() {
   return (
-    <div className='bg-gray-dark'>
-      App
+    <div className="">
+      <UserCard />
     </div>
   );
 }

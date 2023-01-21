@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     colors: {
       'pale-robin-egg-blue': '#96D9CC',
-      'sonic-silver': '#747474'
+      'sonic-silver': '#747474',
+      'platinum': '#E7E7E7',
     },
     extend: {},
   },

@@ -1,30 +1,21 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+
 import Search from "../Search/Search";
+import Spinner from "../Spinner/Spinner";
 import Pagination from "../Pagination/Pagination";
 import UserCardContainer from "./UserCardContainer/UserCardContainer";
 
+import { useFetchUsers } from "../../hooks/useFetchUsers";
+
 const Users = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const getUsers = async (page: number) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_GITHUB}q=gabriel&page=${page}&per_page=9`
-    );
-    return response.json();
-  };
-
-  // Queries
-  const  { data, isFetching, isLoading, isError, isRefetching,isSuccess, ...rest } = useQuery(
-    ["users", currentPage],
-    () => getUsers(currentPage),
-    {
-      keepPreviousData: true,
-    }
-  );
+  const [username, setUserName] = useState("Jessy");
+  const { data, isFetching, isLoading, isError, isRefetching, isSuccess } =
+    useFetchUsers(currentPage, username);
 
   const handleSearchUser = (event: string) => {
-    console.log(event);
+    setUserName(event);
+    setCurrentPage(1);
   };
 
   return (
@@ -35,26 +26,24 @@ const Users = (): JSX.Element => {
           onChange={handleSearchUser}
           label="Enter username or email"
           icon={true}
+          value={username}
         />
       </div>
-      {isFetching ? (
-        <span>Fetching Data</span>
-      ) : isError ? (
-        <span>Error Fetching Data</span>
-      ) : isLoading ? (
-        <span>Loading</span>
+      {isFetching || isLoading || isError || isRefetching ? (
+        <Spinner />
       ) : isSuccess ? (
         <>
           <UserCardContainer users={data.items} />
           <Pagination
-            totalItems={1000}
-                  page={currentPage}
-                  limit={9}
+            totalItems={data?.total_count || 0}
+            page={currentPage}
+            limit={9}
             onPageChange={(page) => setCurrentPage(page)}
           />
         </>
-      ): ''}
-      {isRefetching && (<span>Intentando de nuevo</span>)}
+      ) : (
+        ""
+      )}
     </>
   );
 };

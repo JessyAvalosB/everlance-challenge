@@ -6,15 +6,17 @@ import Label from "../Label/Label";
 interface SearchProps {
   label: string;
   icon?: boolean;
+  value: string;
   onChange: (event: string) => void;
 }
 
 const Search = ({
   label,
   icon = false,
+  value,
   onChange,
 }: SearchProps): JSX.Element => {
-  const [flotingLabel, setFlotingLabel] = useState(false);
+  const [flotingLabel, setFlotingLabel] = useState(true);
   const handleChange = (event: any) => {
     const { value } = event.target;
     onChange(value);
@@ -28,6 +30,7 @@ const Search = ({
         id="search-component"
         className="w-full h-6 border-0 focus-visible:outline-0 text-sm"
         type="text"
+        value={value}
         onChange={handleChange}
       />
     </div>

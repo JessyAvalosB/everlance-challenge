@@ -6,7 +6,7 @@ import { UserCardContainerProps } from "./Types";
 const UserCardContainer = ({ users }: UserCardContainerProps): JSX.Element => {
   return (
     <div className="container grid grid-cols-3 gap-x-8 gap-y-7 max-w-5xl m-auto">
-      {users && users.map((user: User) => <UserCard {...user} />)}
+      {users && users.map((user: User) => <UserCard key={user.id} {...user} />)}
     </div>
   );
 };

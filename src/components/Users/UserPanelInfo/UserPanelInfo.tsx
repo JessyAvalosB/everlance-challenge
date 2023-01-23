@@ -16,7 +16,7 @@ const UserPanelInfo = (): JSX.Element => {
       <div>
         <UserAvatar src={data?.avatar_url} />
       </div>
-      <div className="flex flex-col min-w-[250px] ml-6">
+      <div className="flex flex-col min-w-[250px] max-w-[250px] ml-6">
         <span className="text-lg text-jet font-semibold">{data?.name}</span>
         <span className="text-xs text-sonic-silver font-medium  mt-1">
           {data?.login}

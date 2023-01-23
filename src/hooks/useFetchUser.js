@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-export const useFetchUsers = (currentPage, username) => {
-    const getUsers = async (page, name) => {
+export const useFetchUser = (username) => {
+    const getUser = async () => {
         const response = await fetch(
-            `${process.env.REACT_APP_API_GITHUB}search/users?q=${name}&page=${page}&per_page=9`,
+            `${process.env.REACT_APP_API_GITHUB}users/${username}`,
             {
                 method: "GET",
                 headers: {
@@ -15,12 +15,8 @@ export const useFetchUsers = (currentPage, username) => {
             throw new Error('Network response was not ok')
         }
         return response.json();
-    };
+    }
 
-    // Queries
-    const query =
-        useQuery(["users", currentPage, username], () => getUsers(currentPage, username), {
-            keepPreviousData: true,
-        });
+    const query = useQuery(["user"], () => getUser());
     return query;
 }

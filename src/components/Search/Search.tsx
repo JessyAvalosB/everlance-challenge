@@ -4,17 +4,19 @@ import { IconsNames } from "../Icon/Types";
 import Label from "../Label/Label";
 
 interface SearchProps {
-  label?: string;
+  label: string;
   icon?: boolean;
+  value: string;
   onChange: (event: string) => void;
 }
 
 const Search = ({
-  label = undefined,
+  label,
   icon = false,
+  value,
   onChange,
 }: SearchProps): JSX.Element => {
-  const [flotingLabel, setFlotingLabel] = useState(false);
+  const [flotingLabel, setFlotingLabel] = useState(true);
   const handleChange = (event: any) => {
     const { value } = event.target;
     onChange(value);
@@ -22,12 +24,13 @@ const Search = ({
   };
   return (
     <div className="flex border-[1px] border-platinum rounded-[4px] w-80 p-1">
-      {label && <Label label={label} flotingLabel={flotingLabel} />}
+      <Label label={label} flotingLabel={flotingLabel} />
       {icon && <Icon classname="w-4 mr-1" icon={IconsNames.search} />}
       <input
         id="search-component"
         className="w-full h-6 border-0 focus-visible:outline-0 text-sm"
         type="text"
+        value={value}
         onChange={handleChange}
       />
     </div>

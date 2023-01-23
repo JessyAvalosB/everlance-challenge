@@ -11,7 +11,7 @@ const Label = ({ label, flotingLabel = false }: LabelProps): JSX.Element => {
   return (
     <label
       htmlFor="search-component"
-      className={`text-sm absolute transition-all duration-[.5s] ${
+      className={`text-sm absolute transition-all duration-[.5s] pointer-events-none ${
         flotingLabel ? flotingActive : flotingDesactive
       }`}
     >

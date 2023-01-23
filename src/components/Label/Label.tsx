@@ -1,9 +1,5 @@
 import React from "react";
-
-interface LabelProps {
-  label: string;
-  flotingLabel: boolean;
-}
+import { LabelProps } from "./Types";
 
 const Label = ({ label, flotingLabel = false }: LabelProps): JSX.Element => {
   const flotingActive = "-translate-x-[5px] -translate-y-[30px]";

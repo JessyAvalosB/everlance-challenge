@@ -6,12 +6,15 @@ import Pagination from "../Pagination/Pagination";
 import UserCardContainer from "./UserCardContainer/UserCardContainer";
 
 import { useFetchUsers } from "../../hooks/useFetchUsers";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const Users = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [username, setUserName] = useState("Jessy");
-  const { data, isFetching, isLoading, isError, isRefetching, isSuccess } =
-    useFetchUsers(currentPage, username);
+  const [username, setUserName] = useState("");
+  const { data, isLoading, isSuccess, error } = useFetchUsers(
+    currentPage,
+    username
+  );
 
   const handleSearchUser = (event: string) => {
     setUserName(event);
@@ -29,7 +32,12 @@ const Users = (): JSX.Element => {
           value={username}
         />
       </div>
-      {isFetching || isLoading || isError || isRefetching ? (
+
+      {username === "" ? (
+        <ErrorMessage text="Indroduce name or email to search a user" />
+      ) : error ? (
+        <ErrorMessage text="Somenthing wrong we'll tray again." />
+      ) : isLoading ? (
         <Spinner />
       ) : isSuccess ? (
         <>
@@ -38,7 +46,7 @@ const Users = (): JSX.Element => {
             totalItems={data?.total_count || 0}
             page={currentPage}
             limit={9}
-            onPageChange={(page) => setCurrentPage(page)}
+            onPageChange={(page: number) => setCurrentPage(page)}
           />
         </>
       ) : (

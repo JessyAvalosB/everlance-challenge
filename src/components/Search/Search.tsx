@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import Icon from "../Icon/Icon";
 import { IconsNames } from "../Icon/Types";
 import Label from "../Label/Label";
-
-interface SearchProps {
-  label: string;
-  icon?: boolean;
-  value: string;
-  onChange: (event: string) => void;
-}
+import { SearchProps } from "./Types";
 
 const Search = ({
   label,
@@ -16,7 +10,7 @@ const Search = ({
   value,
   onChange,
 }: SearchProps): JSX.Element => {
-  const [flotingLabel, setFlotingLabel] = useState(true);
+  const [flotingLabel, setFlotingLabel] = useState(false);
   const handleChange = (event: any) => {
     const { value } = event.target;
     onChange(value);

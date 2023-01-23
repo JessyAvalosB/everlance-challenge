@@ -3,15 +3,8 @@ import classnames from "classnames";
 
 import "./Style.css";
 
+import { PaginitionProps } from "./Types";
 import { usePagination, DOTS } from "../../hooks/usePagination";
-
-interface PaginitionProps {
-  totalItems: number;
-  limit?: number;
-  siblingCount?: number;
-  page: number;
-  onPageChange: (n: number) => void;
-}
 
 const Pagination = ({
   onPageChange,
@@ -52,7 +45,7 @@ const Pagination = ({
       >
         <div className="arrow left" />
       </li>
-      {paginationRange!.map((pageNumber) => {
+      {paginationRange!.map((pageNumber: number | string, index: number) => {
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
           return <li className="pagination-item dots">&#8230;</li>;
@@ -64,7 +57,11 @@ const Pagination = ({
             className={classnames("pagination-item", {
               selected: pageNumber === page,
             })}
-            onClick={() => onPageChange(pageNumber)}
+            onClick={() => {
+              if (typeof pageNumber === "number") {
+                onPageChange(pageNumber);
+              }
+            }}
           >
             {pageNumber}
           </li>

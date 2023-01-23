@@ -7,6 +7,7 @@ import UserCardContainer from "./UserCardContainer/UserCardContainer";
 
 import { useFetchUsers } from "../../hooks/useFetchUsers";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { isEmail } from "../../utils/isEmail";
 
 const Users = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +36,8 @@ const Users = (): JSX.Element => {
 
       {username === "" ? (
         <ErrorMessage text="Indroduce name or email to search a user" />
+      ) : username.includes("@") && !isEmail(username) ? (
+        <ErrorMessage text="Indroduce valid email" />
       ) : error ? (
         <ErrorMessage text="Somenthing wrong we'll tray again." />
       ) : isLoading ? (
